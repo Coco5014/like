@@ -95,7 +95,7 @@
         const data = await response.json();
 
         // Mettre à jour les éléments de l'overlay avec les informations du Top 1 Like
-        document.getElementById("top-like-name").innerText = data.name || "Aucun donateur";
+        document.getElementById("top-like-name").innerText = data.name || "Aucun";
         document.getElementById("top-like-likes").innerText = `${data.likes || 0} Likes`;
 
         // Utilisation d'une image de profil par défaut si non spécifiée
