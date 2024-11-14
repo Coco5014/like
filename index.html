@@ -21,49 +21,46 @@
             overflow: hidden;
         }
 
+        /* Conteneur principal Twitch */
         .twitch-container {
             display: flex;
             align-items: center;
             background: linear-gradient(135deg, #6441a5, #9147ff);
-            border-radius: 30px;
+            border-radius: 50px;
             padding: 10px 20px;
             width: 70px;
             overflow: hidden;
             position: relative;
-            transition: width 1s ease, background 0.8s ease;
-            animation: autoExpand 1s forwards, backgroundGlow 1s 1s forwards;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+            transition: width 0.8s ease, background 0.5s ease;
             opacity: 0; /* Commence invisible */
+            animation: fadeInOut 30s infinite;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
         }
 
-        /* Animation de répétition toutes les 30 secondes */
-        @keyframes autoExpand {
-            0% { width: 70px; opacity: 0; }
-            10% { opacity: 1; }
-            100% { width: 320px; opacity: 1; }
+        /* Animation d'apparition et disparition */
+        @keyframes fadeInOut {
+            0%, 93% { opacity: 0; width: 70px; }
+            95% { opacity: 1; width: 320px; }
+            100% { opacity: 1; width: 320px; }
         }
 
-        @keyframes backgroundGlow {
-            0% { background: linear-gradient(135deg, #6441a5, #9147ff); }
-            100% { background: linear-gradient(135deg, #6441a5, #ff6161); }
-        }
-
-        /* Logo Twitch initial puis transformation en logo personnalisé */
+        /* Logo Twitch */
         .twitch-logo {
             width: 40px;
             height: 40px;
-            background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTsgsrjdHBP4sijE5QgGyYay4Bhscc05Rp4VQ&s');
+            background-image: url('https://upload.wikimedia.org/wikipedia/commons/a/af/Twitch_logo.svg');
             background-size: contain;
             background-repeat: no-repeat;
-            transition: background-image 1s ease 0.5s;
-            animation: logoSwap 1s 1s forwards;
+            transition: background-image 1s ease 1s;
+            animation: logoTransform 1s 1.5s forwards;
         }
 
-        @keyframes logoSwap {
-            100% { background-image: url('https://i.ibb.co/y481zv2/pop1.png'); }
+        /* Transformation en logo personnel */
+        @keyframes logoTransform {
+            100% { background-image: url('votre-logo.png'); }
         }
 
-        /* Texte animé */
+        /* Texte de description */
         .twitch-text {
             display: flex;
             flex-direction: column;
@@ -76,8 +73,9 @@
         .twitch-label {
             font-size: 0.9rem;
             font-weight: bold;
-            margin-bottom: 5px;
             color: #ffdfba;
+            text-transform: uppercase;
+            margin-bottom: 5px;
         }
 
         .twitch-handle {
@@ -86,6 +84,7 @@
             text-shadow: 1px 1px 15px rgba(255, 255, 255, 0.4);
         }
 
+        /* Bouton de suivi */
         .follow-button {
             margin-top: 8px;
             background-color: #ff4d4d;
@@ -93,7 +92,6 @@
             padding: 6px 15px;
             border-radius: 20px;
             font-size: 1rem;
-            display: inline-block;
             cursor: pointer;
             transition: background-color 0.3s, box-shadow 0.3s;
             box-shadow: 0 0 12px rgba(255, 77, 77, 0.6);
@@ -104,13 +102,7 @@
             box-shadow: 0 0 18px rgba(255, 26, 26, 0.8);
         }
 
-        /* Animation d'apparition du texte */
-        @keyframes textAppear {
-            0% { opacity: 0; transform: translateX(-20px); }
-            100% { opacity: 1; transform: translateX(0); }
-        }
-
-        /* Animation de clic du doigt */
+        /* Effet de clic du curseur */
         .mouse-click {
             position: absolute;
             top: 65px;
@@ -121,42 +113,31 @@
             background: white;
             border: 2px solid black;
             opacity: 0;
-            animation: click 1s 2.7s forwards;
+            animation: clickEffect 1s 2.7s forwards;
         }
 
-        @keyframes click {
+        @keyframes clickEffect {
             0% { opacity: 1; transform: scale(1); }
             50% { transform: scale(0.9); }
             100% { opacity: 0; transform: scale(1); }
         }
+
+        /* Animation du texte */
+        @keyframes textAppear {
+            0% { opacity: 0; transform: translateX(-20px); }
+            100% { opacity: 1; transform: translateX(0); }
+        }
     </style>
 </head>
 <body>
-    <div class="twitch-container" id="twitchOverlay">
+    <div class="twitch-container">
         <div class="twitch-logo"></div>
         <div class="twitch-text">
-            <span class="twitch-label">Suivez-moi sur Twitch :</span>
+            <span class="twitch-label">Suivez-moi sur Twitch</span>
             <span class="twitch-handle">@Cocolapps</span>
             <div class="follow-button">Suivre</div>
         </div>
         <div class="mouse-click"></div>
     </div>
-
-    <script>
-        // Fonction pour montrer et cacher l'overlay toutes les 30 secondes
-        function showOverlay() {
-            const overlay = document.getElementById('twitchOverlay');
-            overlay.style.opacity = '1';
-            overlay.style.animation = 'autoExpand 1s forwards, backgroundGlow 1s 1s forwards';
-
-            setTimeout(() => {
-                overlay.style.opacity = '0';
-            }, 5000); // Cache l'overlay après 5 secondes
-        }
-
-        // Répète l'animation toutes les 30 secondes
-        showOverlay(); // Affiche immédiatement au chargement
-        setInterval(showOverlay, 30000); // Affiche toutes les 30 secondes
-    </script>
 </body>
 </html>
