@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Animation Pro Twitch</title>
+    <title>Animation Follow Twitch</title>
     <style>
         * {
             margin: 0;
@@ -16,7 +16,7 @@
             justify-content: center;
             align-items: center;
             height: 100vh;
-            background-color: #1a1a1a;
+            background-color: #0d0d0d;
             font-family: Arial, sans-serif;
             overflow: hidden;
         }
@@ -24,28 +24,29 @@
         .twitch-container {
             display: flex;
             align-items: center;
-            background-color: #6441a5;
+            background: linear-gradient(135deg, #6441a5, #9147ff);
             border-radius: 30px;
             padding: 10px 20px;
-            width: 60px;
+            width: 70px;
             overflow: hidden;
             position: relative;
-            transition: width 1s ease;
-            animation: autoExpand 1s forwards, backgroundExpand 1s 1s forwards;
+            transition: width 1s ease, background 0.5s ease;
+            animation: autoExpand 1s forwards, backgroundGlow 1s 1s forwards;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
         }
 
-        /* Animation de déploiement de la bannière */
+        /* Animation de déploiement et de lueur */
         @keyframes autoExpand {
-            0% { width: 60px; }
-            100% { width: 280px; }
+            0% { width: 70px; }
+            100% { width: 300px; }
         }
 
-        @keyframes backgroundExpand {
-            0% { background-color: #6441a5; }
-            100% { background-color: #9147ff; }
+        @keyframes backgroundGlow {
+            0% { background: linear-gradient(135deg, #6441a5, #9147ff); }
+            100% { background: linear-gradient(135deg, #6441a5, #ff4d4d); }
         }
 
-        /* Logo */
+        /* Logo Twitch initial puis transformation en logo personnalisé */
         .twitch-logo {
             width: 40px;
             height: 40px;
@@ -56,7 +57,6 @@
             animation: logoSwap 1s 1s forwards;
         }
 
-        /* Animation de transformation du logo */
         @keyframes logoSwap {
             100% { background-image: url('votre-logo.png'); }
         }
@@ -67,30 +67,32 @@
             flex-direction: column;
             color: white;
             opacity: 0;
-            animation: textAppear 1s 1s forwards;
+            animation: textAppear 1s 1.5s forwards;
             margin-left: 15px;
         }
 
         .twitch-handle {
-            font-size: 1.2rem;
+            font-size: 1.3rem;
             font-weight: bold;
+            text-shadow: 1px 1px 10px rgba(255, 255, 255, 0.3);
         }
 
         .follow-button {
             margin-top: 5px;
-            background-color: #ff6a00;
+            background-color: #ff4d4d;
             color: white;
-            padding: 5px 10px;
-            border-radius: 5px;
-            font-size: 0.9rem;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 1rem;
             display: inline-block;
             cursor: pointer;
-            transition: background-color 0.3s;
-            position: relative;
+            transition: background-color 0.3s, box-shadow 0.3s;
+            box-shadow: 0 0 10px rgba(255, 77, 77, 0.5);
         }
 
         .follow-button:hover {
-            background-color: #e65c00;
+            background-color: #ff1a1a;
+            box-shadow: 0 0 15px rgba(255, 26, 26, 0.7);
         }
 
         /* Animation d'apparition du texte */
@@ -99,18 +101,18 @@
             100% { opacity: 1; transform: translateX(0); }
         }
 
-        /* Animation de clic */
+        /* Animation de clic pour la souris */
         .mouse-click {
             position: absolute;
-            top: 55px;
-            left: 210px;
+            top: 60px;
+            left: 230px;
             width: 20px;
             height: 30px;
             border-radius: 50%;
             background: white;
             border: 2px solid black;
             opacity: 0;
-            animation: click 1s 2s forwards;
+            animation: click 1s 2.5s forwards;
         }
 
         @keyframes click {
