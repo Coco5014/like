@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Animation Twitch</title>
+    <title>Animation Twitch Follow</title>
     <style>
         * {
             margin: 0;
@@ -21,73 +21,104 @@
             overflow: hidden;
         }
 
-        .twitch-banner {
-            width: 300px;
-            height: 150px;
-            background: linear-gradient(45deg, #6441a5, #9147ff);
+        .twitch-container {
             display: flex;
-            justify-content: center;
             align-items: center;
-            border-radius: 15px;
-            box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.5);
-            opacity: 0;
-            animation: fadeInOut 4s infinite;
-            overflow: hidden;
             position: relative;
+            background-color: #6441a5;
+            border-radius: 30px;
+            padding: 10px 20px;
+            width: 60px;
+            overflow: hidden;
+            cursor: pointer;
+            transition: width 0.5s ease;
         }
 
-        .twitch-banner::before {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: rgba(255, 255, 255, 0.1);
+        .twitch-container:hover {
+            width: 250px; /* Déploiement */
+        }
+
+        .twitch-logo {
+            width: 40px;
+            height: 40px;
+            background-image: url('https://upload.wikimedia.org/wikipedia/commons/a/af/Twitch_logo.svg');
+            background-size: contain;
+            background-repeat: no-repeat;
+            margin-right: 10px;
             opacity: 0;
-            animation: shimmer 4s infinite;
+            animation: logoAppear 0.5s forwards;
         }
 
         .twitch-text {
+            display: flex;
+            flex-direction: column;
             color: white;
-            font-size: 1.5rem;
-            font-weight: bold;
-            text-align: center;
             opacity: 0;
-            animation: textFadeIn 2s 1s forwards;
+            animation: textAppear 1s 0.5s forwards;
         }
 
         .twitch-handle {
-            font-size: 1rem;
-            color: #ffffffcc;
-            animation: textFadeIn 2s 2s forwards;
+            font-size: 1.2rem;
+            font-weight: bold;
         }
 
-        @keyframes fadeInOut {
-            0% { opacity: 0; transform: scale(0.9); }
-            25% { opacity: 1; transform: scale(1); }
-            75% { opacity: 1; transform: scale(1); }
-            100% { opacity: 0; transform: scale(0.9); }
+        .follow-button {
+            margin-top: 5px;
+            background-color: #9147ff;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-size: 0.9rem;
+            transition: background-color 0.3s;
+            position: relative;
         }
 
-        @keyframes shimmer {
-            0% { opacity: 0; transform: translateX(-100%); }
-            50% { opacity: 1; transform: translateX(100%); }
-            100% { opacity: 0; transform: translateX(100%); }
+        .follow-button:hover {
+            background-color: #772ce8;
         }
 
-        @keyframes textFadeIn {
-            0% { opacity: 0; transform: translateY(10px); }
-            100% { opacity: 1; transform: translateY(0); }
+        /* Animation du logo */
+        @keyframes logoAppear {
+            0% { opacity: 0; transform: scale(0); }
+            100% { opacity: 1; transform: scale(1); }
         }
+
+        /* Animation du texte */
+        @keyframes textAppear {
+            0% { opacity: 0; transform: translateX(-20px); }
+            100% { opacity: 1; transform: translateX(0); }
+        }
+
+        /* Animation du clic de la souris */
+        .mouse-click {
+            position: absolute;
+            top: 30px;
+            left: 180px;
+            width: 20px;
+            height: 30px;
+            border-radius: 50%;
+            background: white;
+            border: 2px solid black;
+            opacity: 0;
+            animation: click 2s 1.5s forwards;
+        }
+
+        @keyframes click {
+            0% { opacity: 1; transform: scale(1); }
+            50% { transform: scale(0.9); }
+            100% { opacity: 0; transform: scale(1); }
+        }
+
     </style>
 </head>
 <body>
-    <div class="twitch-banner">
+    <div class="twitch-container">
+        <div class="twitch-logo"></div>
         <div class="twitch-text">
-            Suivez-moi sur <br> 
             <span class="twitch-handle">@Cocolapps</span>
+            <div class="follow-button">Suivre</div>
         </div>
+        <div class="mouse-click"></div>
     </div>
 </body>
 </html>
