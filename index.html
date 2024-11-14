@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bannière Animée</title>
+    <title>Animation Twitch</title>
     <style>
         * {
             margin: 0;
@@ -18,52 +18,75 @@
             height: 100vh;
             background-color: #1a1a1a;
             font-family: Arial, sans-serif;
+            overflow: hidden;
         }
 
-        .banner {
-            width: 80%;
-            max-width: 600px;
-            height: 200px;
+        .twitch-banner {
+            width: 300px;
+            height: 150px;
+            background: linear-gradient(45deg, #6441a5, #9147ff);
             display: flex;
             justify-content: center;
             align-items: center;
-            position: relative;
-            background: linear-gradient(45deg, #ff0055, #ff5500, #ffaa00);
-            background-size: 300% 300%;
             border-radius: 15px;
-            animation: gradientAnimation 5s infinite alternate;
+            box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.5);
+            opacity: 0;
+            animation: fadeInOut 4s infinite;
             overflow: hidden;
-            border: 5px solid #ffffff33;
+            position: relative;
         }
 
-        .text-container {
-            text-align: center;
+        .twitch-banner::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(255, 255, 255, 0.1);
+            opacity: 0;
+            animation: shimmer 4s infinite;
+        }
+
+        .twitch-text {
             color: white;
-            animation: pulse 1.5s infinite;
+            font-size: 1.5rem;
+            font-weight: bold;
+            text-align: center;
+            opacity: 0;
+            animation: textFadeIn 2s 1s forwards;
         }
 
-        .text-container h1 {
-            font-size: 2rem;
-            text-transform: uppercase;
-            letter-spacing: 2px;
+        .twitch-handle {
+            font-size: 1rem;
+            color: #ffffffcc;
+            animation: textFadeIn 2s 2s forwards;
         }
 
-        /* Animations */
-        @keyframes gradientAnimation {
-            0% { background-position: 0% 50%; }
-            100% { background-position: 100% 50%; }
+        @keyframes fadeInOut {
+            0% { opacity: 0; transform: scale(0.9); }
+            25% { opacity: 1; transform: scale(1); }
+            75% { opacity: 1; transform: scale(1); }
+            100% { opacity: 0; transform: scale(0.9); }
         }
 
-        @keyframes pulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.1); }
+        @keyframes shimmer {
+            0% { opacity: 0; transform: translateX(-100%); }
+            50% { opacity: 1; transform: translateX(100%); }
+            100% { opacity: 0; transform: translateX(100%); }
+        }
+
+        @keyframes textFadeIn {
+            0% { opacity: 0; transform: translateY(10px); }
+            100% { opacity: 1; transform: translateY(0); }
         }
     </style>
 </head>
 <body>
-    <div class="banner">
-        <div class="text-container">
-            <h1>Votre Nom ou Message</h1>
+    <div class="twitch-banner">
+        <div class="twitch-text">
+            Suivez-moi sur <br> 
+            <span class="twitch-handle">@Cocolapps</span>
         </div>
     </div>
 </body>
