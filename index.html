@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Animation Twitch Follow</title>
+    <title>Animation Pro Twitch</title>
     <style>
         * {
             margin: 0;
@@ -24,37 +24,51 @@
         .twitch-container {
             display: flex;
             align-items: center;
-            position: relative;
             background-color: #6441a5;
             border-radius: 30px;
             padding: 10px 20px;
             width: 60px;
             overflow: hidden;
-            cursor: pointer;
-            transition: width 0.5s ease;
+            position: relative;
+            transition: width 1s ease;
+            animation: autoExpand 1s forwards, backgroundExpand 1s 1s forwards;
         }
 
-        .twitch-container:hover {
-            width: 250px; /* Déploiement */
+        /* Animation de déploiement de la bannière */
+        @keyframes autoExpand {
+            0% { width: 60px; }
+            100% { width: 280px; }
         }
 
+        @keyframes backgroundExpand {
+            0% { background-color: #6441a5; }
+            100% { background-color: #9147ff; }
+        }
+
+        /* Logo */
         .twitch-logo {
             width: 40px;
             height: 40px;
             background-image: url('https://upload.wikimedia.org/wikipedia/commons/a/af/Twitch_logo.svg');
             background-size: contain;
             background-repeat: no-repeat;
-            margin-right: 10px;
-            opacity: 0;
-            animation: logoAppear 0.5s forwards;
+            transition: background-image 1s ease 0.5s;
+            animation: logoSwap 1s 1s forwards;
         }
 
+        /* Animation de transformation du logo */
+        @keyframes logoSwap {
+            100% { background-image: url('votre-logo.png'); }
+        }
+
+        /* Texte animé */
         .twitch-text {
             display: flex;
             flex-direction: column;
             color: white;
             opacity: 0;
-            animation: textAppear 1s 0.5s forwards;
+            animation: textAppear 1s 1s forwards;
+            margin-left: 15px;
         }
 
         .twitch-handle {
@@ -64,43 +78,39 @@
 
         .follow-button {
             margin-top: 5px;
-            background-color: #9147ff;
+            background-color: #ff6a00;
             color: white;
             padding: 5px 10px;
             border-radius: 5px;
             font-size: 0.9rem;
+            display: inline-block;
+            cursor: pointer;
             transition: background-color 0.3s;
             position: relative;
         }
 
         .follow-button:hover {
-            background-color: #772ce8;
+            background-color: #e65c00;
         }
 
-        /* Animation du logo */
-        @keyframes logoAppear {
-            0% { opacity: 0; transform: scale(0); }
-            100% { opacity: 1; transform: scale(1); }
-        }
-
-        /* Animation du texte */
+        /* Animation d'apparition du texte */
         @keyframes textAppear {
             0% { opacity: 0; transform: translateX(-20px); }
             100% { opacity: 1; transform: translateX(0); }
         }
 
-        /* Animation du clic de la souris */
+        /* Animation de clic */
         .mouse-click {
             position: absolute;
-            top: 30px;
-            left: 180px;
+            top: 55px;
+            left: 210px;
             width: 20px;
             height: 30px;
             border-radius: 50%;
             background: white;
             border: 2px solid black;
             opacity: 0;
-            animation: click 2s 1.5s forwards;
+            animation: click 1s 2s forwards;
         }
 
         @keyframes click {
@@ -108,7 +118,6 @@
             50% { transform: scale(0.9); }
             100% { opacity: 0; transform: scale(1); }
         }
-
     </style>
 </head>
 <body>
