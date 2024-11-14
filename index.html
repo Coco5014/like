@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Animation Follow Twitch Pro</title>
+    <title>Overlay Follow Twitch</title>
     <style>
         * {
             margin: 0;
@@ -33,12 +33,14 @@
             transition: width 1s ease, background 0.8s ease;
             animation: autoExpand 1s forwards, backgroundGlow 1s 1s forwards;
             box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+            opacity: 0; /* Commence invisible */
         }
 
-        /* Animation de déploiement et de lueur */
+        /* Animation de répétition toutes les 30 secondes */
         @keyframes autoExpand {
-            0% { width: 70px; }
-            100% { width: 320px; }
+            0% { width: 70px; opacity: 0; }
+            10% { opacity: 1; }
+            100% { width: 320px; opacity: 1; }
         }
 
         @keyframes backgroundGlow {
@@ -69,6 +71,13 @@
             opacity: 0;
             animation: textAppear 1s 1.5s forwards;
             margin-left: 15px;
+        }
+
+        .twitch-label {
+            font-size: 0.9rem;
+            font-weight: bold;
+            margin-bottom: 5px;
+            color: #ffdfba;
         }
 
         .twitch-handle {
@@ -123,13 +132,31 @@
     </style>
 </head>
 <body>
-    <div class="twitch-container">
+    <div class="twitch-container" id="twitchOverlay">
         <div class="twitch-logo"></div>
         <div class="twitch-text">
+            <span class="twitch-label">Suivez-moi sur Twitch :</span>
             <span class="twitch-handle">@Cocolapps</span>
             <div class="follow-button">Suivre</div>
         </div>
         <div class="mouse-click"></div>
     </div>
+
+    <script>
+        // Fonction pour montrer et cacher l'overlay toutes les 30 secondes
+        function showOverlay() {
+            const overlay = document.getElementById('twitchOverlay');
+            overlay.style.opacity = '1';
+            overlay.style.animation = 'autoExpand 1s forwards, backgroundGlow 1s 1s forwards';
+
+            setTimeout(() => {
+                overlay.style.opacity = '0';
+            }, 5000); // Cache l'overlay après 5 secondes
+        }
+
+        // Répète l'animation toutes les 30 secondes
+        showOverlay(); // Affiche immédiatement au chargement
+        setInterval(showOverlay, 30000); // Affiche toutes les 30 secondes
+    </script>
 </body>
 </html>
